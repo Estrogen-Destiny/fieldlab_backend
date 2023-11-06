@@ -10,8 +10,6 @@ Een "Definition of Done" (DoD) is een lijst met criteria die bepalen wanneer een
 
 - **Unit Tests:** Alle relevante unit tests zijn geschreven en alle tests slagen zonder fouten.
 
-- **Integratietests:** De code is geïntegreerd met bestaande componenten en systemen en doorstaat integratietests.
-
 - **Code Review:** De code is beoordeeld en goedgekeurd door teamleden.
 
 - **Documentatie:** Relevante documentatie is bijgewerkt.
@@ -22,5 +20,5 @@ Een "Definition of Done" (DoD) is een lijst met criteria die bepalen wanneer een
 
 - **Geen openstaande taken:** Er zijn geen openstaande taken of afhankelijkheden voor deze taak.
 
-- **Klaar voor release:** De taak kan zonder problemen worden vrijgegeven voor productie.
+- **Klaar voor release op branch main:** De taak kan zonder problemen worden vrijgegeven op de main branch.
 
