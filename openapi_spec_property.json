@@ -1,0 +1,104 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Vacation Home API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/properties/": {
+      "get": {
+        "summary": "Get properties",
+        "description": "Get a list of properties.",
+        "responses": {
+          "200": {
+            "description": "list of properties",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Property"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new property",
+        "description": "Create a new property",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Property"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The newly created property",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Property"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Property could not be created"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Property": {
+        "type": "object",
+        "required": [
+          "name",
+          "owner_id",
+          "maximum_guests",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "owner_id": {
+            "type": "integer"
+          },
+          "location": {
+            "type": "string"
+          },
+          "maximum_guests": {
+            "type": "integer"
+          },
+          "type": {
+            "$ref": "#/components/schemas/PropertyType"
+          }
+        }
+      },
+      "PropertyType": {
+        "type": "string",
+        "enum": [
+          "House",
+          "Appartment",
+          "room"
+        ]
+      }
+    }
+  }
+}
