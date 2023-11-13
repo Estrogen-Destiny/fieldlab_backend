@@ -61,11 +61,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case 'POST':
         try {
             $data = json_decode(file_get_contents('php://input'), true);
-            $newProperty = createProperty($_POST);
+            $newProperty = createProperty($data);
             returnJsonOfData($newProperty);
-        } catch (\Throwable $th) {
-            http_response_code(500);
-            echo json_encode(['error' => 'Invalid json data']);
+        } catch (\ValueError $e) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Invalid json data', 'valueError' => $e->getMessage()]);
             exit();
         }
         break;
