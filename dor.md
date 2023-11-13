@@ -1,10 +1,9 @@
 # Definition of Ready
 
-### Clear Description:
+### Clear description:
 - The user story contains a detailed description of the functionality or feature to be developed.
 
-Acceptance criteria:
-
+### Acceptance criteria:
 - The property meets the specified functional requirements.
 - The feature has been tested and functions as expected.
 - Any user interface elements are properly designed and integrated.
@@ -15,5 +14,5 @@ Acceptance criteria:
 ### Priority:
 - The user story is appropriately prioritized within the product backlog, in line with the project objectives and within the project scope.
 
-### Estimated Effort:
+### Estimated effort:
 - There is a rough estimate of the effort required to complete the user story. This helps with project planning and resource allocation.

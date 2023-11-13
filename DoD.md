@@ -1,24 +1,23 @@
 # Definition of Done
 
-**Duidelijke Beschrijving:**
+### Clear Description:
+- A “Definition of Done” (DoD) is a list of criteria that determine when a task, user story, or project is considered complete, giving teams a clear standard for work delivery.
 
-Een "Definition of Done" (DoD) is een lijst met criteria die bepalen wanneer een taak, user story of project als voltooid wordt beschouwd, waardoor teams een duidelijke standaard hebben voor de oplevering van werk.
+### Definition of done:
 
-**DoD:**
+### Functional Requirements:
+- The task, feature, or user story meets all functional requirements as specified in the product backlog.
 
-- **Functionele vereisten:** De taak, functie of user story voldoet aan alle functionele vereisten zoals gespecificeerd in de productbacklog.
+- **Unit Tests:** All relevant unit tests have been written and all tests pass without errors.
 
-- **Unit Tests:** Alle relevante unit tests zijn geschreven en alle tests slagen zonder fouten.
+- **Code Review:** The code has been reviewed and approved by team members.
 
-- **Code Review:** De code is beoordeeld en goedgekeurd door teamleden.
+- **Documentation:** Relevant documentation has been updated.
 
-- **Documentatie:** Relevante documentatie is bijgewerkt.
+- **Acceptance criteria:** It complies with DoR.
 
-- **Acceptatiecriteria:** Het voldoet aan DoR.
+- **No known bugs:** There are no known bugs or errors that disrupt functionality.
 
-- **Geen bekende bugs:** Er zijn geen bekende bugs of fouten die de functionaliteit verstoren.
+- **No open tasks:** There are no open tasks or dependencies for this task.
 
-- **Geen openstaande taken:** Er zijn geen openstaande taken of afhankelijkheden voor deze taak.
-
-- **Klaar voor release op branch main:** De taak kan zonder problemen worden vrijgegeven op de main branch.
-
+- **Ready for release on main branch:** The job can be released on the main branch without any problems.
