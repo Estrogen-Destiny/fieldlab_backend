@@ -1,19 +1,19 @@
 # Definition of Ready
 
-### Duidelijke Beschrijving:
-- Het gebruikersverhaal bevat een gedetailleerde beschrijving van de functionaliteit of eigenschap die ontwikkeld moet worden.
+### Clear Description:
+- The user story contains a detailed description of the functionality or feature to be developed.
 
-Acceptatiecriteria:
+Acceptance criteria:
 
-- De eigenschap voldoet aan de gespecificeerde functionele vereisten.
-- De eigenschap is getest en functioneert zoals verwacht.
-- Eventuele gebruikersinterface-elementen zijn correct ontworpen en geïntegreerd.
-- Foutafhandeling en randgevallen worden overwogen en aangepakt.
-- De eigenschap is gedocumenteerd indien nodig.
-- Geen Openstaande Vragen: Alle vragen of onduidelijkheden met betrekking tot het gebruikersverhaal zijn opgelost, en er zijn geen openstaande kwesties of onzekerheden met betrekking tot de implementatie.
+- The property meets the specified functional requirements.
+- The feature has been tested and functions as expected.
+- Any user interface elements are properly designed and integrated.
+- Error handling and edge cases are considered and addressed.
+- The property is documented if necessary.
+- No Outstanding Questions: All questions or uncertainties regarding the user story have been resolved, and there are no outstanding issues or uncertainties regarding implementation.
 
-### Prioriteit:
-- Het gebruikersverhaal is op passende wijze geprioriteerd binnen de productbacklog, in lijn met de doelstellingen van het project en binnen de scope van het project.
+### Priority:
+- The user story is appropriately prioritized within the product backlog, in line with the project objectives and within the project scope.
 
-### Geschatte Inspanning:
-- Er is een ruwe schatting van de inspanning die nodig is om het gebruikersverhaal te voltooien. Dit helpt bij projectplanning en het toewijzen van middelen.
+### Estimated Effort:
+- There is a rough estimate of the effort required to complete the user story. This helps with project planning and resource allocation.
