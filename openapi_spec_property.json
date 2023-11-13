@@ -96,7 +96,7 @@
         "enum": [
           "House",
           "Appartment",
-          "room"
+          "Room"
         ]
       }
     }
