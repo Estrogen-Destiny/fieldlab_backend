@@ -66,17 +66,17 @@ paths:
       description: Create a new reservation for a location
       requestBody:
         content:
-        application/json:
-        schema:
-          $ref: '#/components/schemas/Reservation'
-        responses:
-          '200':
-            description: the newly created reservation
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/Reservation'
-          '400':
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reservation'
+      responses:
+        '200':
+          description: the newly created reservation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+        '400':
             description: could not create a new reservation
 components:
   schemas:
