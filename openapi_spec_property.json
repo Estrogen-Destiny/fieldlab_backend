@@ -149,8 +149,9 @@ components:
         check_out_date:
           type: string
           format: date
-          
+
     allReservations:
+    
       type: object
       properties:
         id:
