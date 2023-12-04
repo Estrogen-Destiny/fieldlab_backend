@@ -149,16 +149,15 @@ components:
         check_out_date:
           type: string
           format: date
-
+          
     allReservations:
-    
       type: object
       properties:
         id:
           type: integer
         property_id:
           type: integer
-        guest_name:
+        guest_id:
           type: string
         price:
           type: number
