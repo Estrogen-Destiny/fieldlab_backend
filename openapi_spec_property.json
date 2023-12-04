@@ -78,6 +78,30 @@ paths:
                 $ref: '#/components/schemas/Reservation'
         '400':
             description: could not create a new reservation
+            
+  /api/reservations/{guest}:
+    get:
+      summary: View list reservations
+      description: Retrieve a list of all reservations for the authenticated user.
+      parameters:
+        - name: guest
+          in: path
+          description: The location for which reservations are requested.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of reservations 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/allReservations'
+        '404':
+          description: Not found
+          
 components:
   schemas:
     Property:
@@ -125,3 +149,32 @@ components:
         check_out_date:
           type: string
           format: date
+          
+    allReservations:
+      type: object
+      properties:
+        id:
+          type: integer
+        property_id:
+          type: integer
+        guest_name:
+          type: string
+        price:
+          type: number
+          format: currency
+        check_in_date:
+          type: string
+          format: date-time
+        check_out_date:
+          type: string
+          format: date-time
+        room_number:
+          type: integer
+        maximum_guests:
+          type: integer
+        
+        type: 
+         $ref: '#/components/schemas/PropertyType'
+
+          
+          
