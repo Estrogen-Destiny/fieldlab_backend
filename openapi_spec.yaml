@@ -100,6 +100,12 @@ components:
           type: string
         maximum_guests:
           type: integer
+        check_in: 
+          type: string
+          format: date-time
+        check_out: 
+          type: string
+          format: date-time
         type:
           $ref: '#/components/schemas/PropertyType'
 
