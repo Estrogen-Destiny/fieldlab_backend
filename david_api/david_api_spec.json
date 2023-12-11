@@ -1,0 +1,123 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "StayNL API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/kamers": {
+      "post": {
+        "summary": "Add a new room",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "foto": {
+                    "type": "string"
+                  },
+                  "informatie_kamer": {
+                    "type": "string"
+                  },
+                  "faciliteiten": {
+                    "type": "string"
+                  },
+                  "beschikbaarheid": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "kamer_spec": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/kamers/{id}": {
+      "put": {
+        "summary": "Update a specific room by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "foto": {
+                    "type": "string"
+                  },
+                  "informatie_kamer": {
+                    "type": "string"
+                  },
+                  "faciliteiten": {
+                    "type": "string"
+                  },
+                  "beschikbaarheid": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "kamer_spec": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a specific room by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    }
+  }
+}
