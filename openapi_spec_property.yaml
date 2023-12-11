@@ -124,4 +124,30 @@ components:
           format: date
         check_out_date:
           type: string
-          format: date
+          format: date 
+
+    allReservations:
+      type: object
+      properties:
+        id:
+          type: integer
+        property_id:
+          type: integer
+        guest_id:
+          type: string
+        price:
+          type: number
+          format: currency
+        check_in_date:
+          type: string
+          format: date-time
+        check_out_date:
+          type: string
+          format: date-time
+        room_number:
+          type: integer
+        maximum_guests:
+          type: integer
+        
+        type: 
+         $ref: '#/components/schemas/PropertyType'
