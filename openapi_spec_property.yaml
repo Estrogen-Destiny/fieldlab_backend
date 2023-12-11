@@ -1,0 +1,178 @@
+openapi: 3.0.0
+info:
+  title: Vacation Home API
+  version: 1.0.0
+
+paths:
+  /api/properties/:
+    get:
+      summary: Get properties
+      description: Get a list of properties.
+      responses:
+        '200':
+          description: List of properties
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Property'
+        '404':
+          description: Not Found
+
+    post:
+      summary: Create new property
+      description: Create a new property
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Property'
+      responses:
+        '200':
+          description: The newly created property
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Property'
+        '400':
+          description: Property could not be created
+
+  /api/reservations/{location}:
+    get:
+      summary: Get reservations by location
+      description: Get a list of reservations for a specific location.
+      parameters:
+        - name: location
+          in: path
+          description: The location for which reservations are requested.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of reservations for the specified location
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reservation'
+        '404':
+          description: Not found
+          
+    post:
+      summary: Create reservations by location
+      description: Create a new reservation for a location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reservation'
+      responses:
+        '200':
+          description: the newly created reservation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+        '400':
+            description: could not create a new reservation
+            
+                        
+  /api/reservations/{guest}:
+    get:
+      summary: View list reservations
+      description: Retrieve a list of all reservations for the authenticated user.
+      parameters:
+        - name: guest
+          in: path
+          description: The location for which reservations are requested.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of reservations 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/allReservations'
+        '404':
+          description: Not found
+          
+components:
+  schemas:
+    Property:
+      type: object
+      required:
+        - name
+        - owner_id
+        - maximum_guests
+        - type
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        owner_id:
+          type: integer
+        location:
+          type: string
+        maximum_guests:
+          type: integer
+        type:
+          $ref: '#/components/schemas/PropertyType'
+
+    PropertyType:
+      type: string
+      enum:
+        - House
+        - Apartment
+        - Room
+
+    Reservation:
+      type: object
+      properties:
+        id:
+          type: integer
+        property_id:
+          type: integer
+        guest_name:
+          type: string
+        check_in_date:
+          type: string
+          format: date
+        check_out_date:
+          type: string
+          format: date 
+
+    allReservations:
+      type: object
+      properties:
+        id:
+          type: integer
+        property_id:
+          type: integer
+        guest_id:
+          type: string
+        price:
+          type: number
+          format: currency
+        check_in_date:
+          type: string
+          format: date-time
+        check_out_date:
+          type: string
+          format: date-time
+        room_number:
+          type: integer
+        maximum_guests:
+          type: integer
+        
+        type: 
+         $ref: '#/components/schemas/PropertyType'
