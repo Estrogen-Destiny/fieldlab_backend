@@ -39,16 +39,17 @@ paths:
           description: Property could not be created
 
   /api/reservations/{location}:
+    parameters:
+      - name: location
+        in: path
+        description: The location for which reservations are requested.
+        required: true
+        schema:
+          type: string
+
     get:
       summary: Get reservations by location
       description: Get a list of reservations for a specific location.
-      parameters:
-        - name: location
-          in: path
-          description: The location for which reservations are requested.
-          required: true
-          schema:
-            type: string
       responses:
         '200':
           description: List of reservations for the specified location
@@ -77,7 +78,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Reservation'
         '400':
-            description: could not create a new reservation
+          description: could not create a new reservation
+
             
                         
   /api/reservations/{guest}:
