@@ -1,0 +1,23 @@
+{
+  "name": "fieldlab_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dylan-Kuiper/fieldlab_backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dylan-Kuiper/fieldlab_backend/issues"
+  },
+  "homepage": "https://github.com/Dylan-Kuiper/fieldlab_backend#readme",
+  "dependencies": {
+    "mysql": "^2.18.1",
+    "node.js": "^0.0.1-security"
+  }
+}
