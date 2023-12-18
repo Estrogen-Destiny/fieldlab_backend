@@ -1,61 +1,77 @@
 <?php
 
-require 'vendor/autoload.php';
-
-use Slim\Factory\AppFactory;
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
-
-// Set up database connection
-$dbConfig = [
-    'host' => 'localhost',
-    'dbname' => 'stayNL',
-    'user' => 'root',
-    'password' => '',
-];
-
-$pdo = new PDO("mysql:host={$dbConfig['host']};dbname={$dbConfig['dbname']}", $dbConfig['user'], $dbConfig['password']);
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// Include connection file
+require 'conn.php';
 
 // Set up Slim app
-$app = AppFactory::create();
-$app->setBasePath('/david_api');
+$basePath = '/david_api';
+
+// Parse the request URI to get the route
+$requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$trimmedUri = rtrim($requestUri, '/');
+$basePathLength = strlen($basePath);
+
+// Check if the request starts with the base path
+if (strncmp($trimmedUri, $basePath, $basePathLength) !== 0) {
+    http_response_code(404);
+    exit();
+}
+
+// Remove the base path from the request URI
+$trimmedUri = substr($trimmedUri, $basePathLength);
 
 // Define API routes
-$app->group('/kamers', function ($group) use ($pdo) {
-    // Create a new room
-    $group->post('', function (Request $request, Response $response) use ($pdo) {
-        $data = $request->getParsedBody();
+if (strpos($trimmedUri, '/kamers') === 0) {
+    // Get the HTTP method (GET, POST, PUT, DELETE)
+    $method = $_SERVER['REQUEST_METHOD'];
 
-        $stmt = $pdo->prepare('INSERT INTO kamer_info (name, location, foto, informatie_kamer, faciliteiten, beschikbaarheid, kamer_spec, maximum_guests, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
-        $stmt->execute([$data['name'], $data['location'], $data['foto'], $data['informatie_kamer'], $data['faciliteiten'], $data['beschikbaarheid'], $data['kamer_spec'], $data['maximum_guests'], $data['type']]);
+    // Get the endpoint
+    $endpoint = substr($trimmedUri, strlen('/kamers'));
 
-        $response = $response->withStatus(201)->withHeader('Content-Type', 'application/json');
-        $response->getBody()->write(json_encode($data));
-        return $response->withHeader('Content-Type', 'application/json');
-    });
+    // Get request data
+    $data = json_decode(file_get_contents('php://input'), true);
 
-    // Update a room
-    $group->put('/{id}', function (Request $request, Response $response, array $args) use ($pdo) {
-        $data = $request->getParsedBody();
-        $id = $args['id'];
+    // Route handling
+    switch ($method) {
+        case 'GET':
+            $stmt = $conn->prepare('SELECT * FROM kamer_info');
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $stmt = $pdo->prepare('UPDATE kamer_info SET name=?, location=?, foto=?, informatie_kamer=?, faciliteiten=?, beschikbaarheid=?, kamer_spec=?, maximum_guests=?, type=? WHERE id=?');
-        $stmt->execute([$data['name'], $data['location'], $data['foto'], $data['informatie_kamer'], $data['faciliteiten'], $data['beschikbaarheid'], $data['kamer_spec'], $data['maximum_guests'], $data['type'], $id]);
+            header('Content-Type: application/json');
+            echo json_encode($result);
+            break;
+            
+        case 'POST':
+            $stmt = $conn->prepare('INSERT INTO kamer_info (name, location, foto, informatie_kamer, faciliteiten, beschikbaarheid, kamer_spec, maximum_guests, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+            $stmt->execute([$data['name'], $data['location'], $data['foto'], $data['informatie_kamer'], $data['faciliteiten'], $data['beschikbaarheid'], $data['kamer_spec'], $data['maximum_guests'], $data['type']]);
+            
+            http_response_code(201);
+            header('Content-Type: application/json');
+            echo json_encode($data);
+            break;
 
-        $response->getBody()->write(json_encode($data));
-        return $response->withHeader('Content-Type', 'application/json');
-    });
+        case 'PUT':
+            $id = ltrim($endpoint, '/');
+            $stmt = $conn->prepare('UPDATE kamer_info SET name=?, location=?, foto=?, informatie_kamer=?, faciliteiten=?, beschikbaarheid=?, kamer_spec=?, maximum_guests=?, type=? WHERE id=?');
+            $stmt->execute([$data['name'], $data['location'], $data['foto'], $data['informatie_kamer'], $data['faciliteiten'], $data['beschikbaarheid'], $data['kamer_spec'], $data['maximum_guests'], $data['type'], $id]);
+            
+            header('Content-Type: application/json');
+            echo json_encode($data);
+            break;
 
-    // Delete a room
-    $group->delete('/{id}', function (Request $request, Response $response, array $args) use ($pdo) {
-        $id = $args['id'];
+        case 'DELETE':
+            $id = ltrim($endpoint, '/');
+            $stmt = $conn->prepare('DELETE FROM kamer_info WHERE id=?');
+            $stmt->execute([$id]);
+            
+            http_response_code(204);
+            break;
 
-        $stmt = $pdo->prepare('DELETE FROM kamer_info WHERE id=?');
-        $stmt->execute([$id]);
-
-        return $response->withStatus(204);
-    });
-});
-
-$app->run();
+        default:
+            http_response_code(405);
+            break;
+    }
+} else {
+    http_response_code(404);
+}
